@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema({
         sparse: true, // Allows null for non-student users
         trim: true
     },
+    vendorId: {
+        type: String,
+        sparse: true,
+        trim: true
+    },
     name: {
         type: String,
         required: [true, 'Please provide a name'],

@@ -8,7 +8,7 @@ const { sendTokenResponse } = require('../utils/tokenUtils');
  */
 exports.register = async (req, res) => {
     try {
-        const { name, email, password, role, studentId } = req.body;
+        const { name, email, password, role, studentId, vendorId } = req.body;
 
         // Validation
         if (!name || !email || !password) {
@@ -27,11 +27,18 @@ exports.register = async (req, res) => {
             });
         }
 
-        // For students, studentId is required
+        // Role-based validation
         if (role === 'student' && !studentId) {
             return res.status(400).json({
                 success: false,
                 message: 'Student ID is required for student registration'
+            });
+        }
+
+        if (role === 'vendor' && !vendorId) {
+            return res.status(400).json({
+                success: false,
+                message: 'Vendor ID is required for vendor registration'
             });
         }
 
@@ -41,7 +48,8 @@ exports.register = async (req, res) => {
             email,
             password,
             role: role || 'student',
-            studentId: role === 'student' ? studentId : undefined
+            studentId: role === 'student' ? studentId : undefined,
+            vendorId: role === 'vendor' ? vendorId : undefined
         });
 
         // Send token response

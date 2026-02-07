@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-primary: #ff3300;
+  /* Vivid Red-Orange */
+
+  --font-heading: "Oswald", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+body {
+  @apply bg-black text-white font-body antialiased overflow-x-hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-heading uppercase tracking-tight;
+}
+
+/* Hide scrollbar for immersive feel */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.cinematic-text-shadow {
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
