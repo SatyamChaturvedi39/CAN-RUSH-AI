@@ -12,7 +12,7 @@ const { emitNewOrder, emitOrderUpdate, emitOrderReady, emitPenalty } = require('
  * @route   POST /api/orders
  * @access  Private (Student)
  */
-exports.createOrder = async (req, res) => {
+const createOrder = async (req, res) => {
     try {
         const { vendorId, items, requestedPickupTime } = req.body;
 
@@ -174,7 +174,7 @@ exports.createOrder = async (req, res) => {
  * @route   GET /api/orders/my-orders
  * @access  Private (Student)
  */
-exports.getMyOrders = async (req, res) => {
+const getMyOrders = async (req, res) => {
     try {
         const orders = await Order.find({ studentId: req.user.id })
             .populate('vendorId', 'name vendorId')
@@ -200,7 +200,7 @@ exports.getMyOrders = async (req, res) => {
  * @route   GET /api/orders/vendor/queue
  * @access  Private (Vendor)
  */
-exports.getVendorQueue = async (req, res) => {
+const getVendorQueue = async (req, res) => {
     try {
         // Find vendor associated with this user
         const vendor = await Vendor.findOne({ userId: req.user.id });
@@ -238,7 +238,7 @@ exports.getVendorQueue = async (req, res) => {
  * @route   PUT /api/orders/:id/accept
  * @access  Private (Vendor)
  */
-exports.acceptOrder = async (req, res) => {
+const acceptOrder = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
 
@@ -284,7 +284,7 @@ exports.acceptOrder = async (req, res) => {
  * @route   PUT /api/orders/:id/preparing
  * @access  Private (Vendor)
  */
-exports.markPreparing = async (req, res) => {
+const markPreparing = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
 
@@ -317,7 +317,7 @@ exports.markPreparing = async (req, res) => {
  * @route   PUT /api/orders/:id/ready
  * @access  Private (Vendor)
  */
-exports.markReady = async (req, res) => {
+const markReady = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
 
@@ -375,7 +375,7 @@ exports.markReady = async (req, res) => {
  * @route   PUT /api/orders/:id/complete
  * @access  Private (Student/Vendor)
  */
-exports.completeOrder = async (req, res) => {
+const completeOrder = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
 
@@ -427,7 +427,7 @@ exports.completeOrder = async (req, res) => {
  * @route   PUT /api/orders/:id/cancel
  * @access  Private (Student/Vendor)
  */
-exports.cancelOrder = async (req, res) => {
+const cancelOrder = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
 
@@ -470,7 +470,7 @@ exports.cancelOrder = async (req, res) => {
  * @route   GET /api/orders/:id
  * @access  Private
  */
-exports.getOrder = async (req, res) => {
+const getOrder = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id)
             .populate('studentId', 'name email studentId')

@@ -6,7 +6,7 @@ const Penalty = require('../models/Penalty');
  * @route   GET /api/admin/penalties
  * @access  Private (Admin)
  */
-exports.getAllPenalties = async (req, res) => {
+const getAllPenalties = async (req, res) => {
     try {
         const penalties = await Penalty.find()
             .populate('studentId', 'name email studentId')
@@ -33,7 +33,7 @@ exports.getAllPenalties = async (req, res) => {
  * @route   PUT /api/admin/penalties/:id/clear
  * @access  Private (Admin)
  */
-exports.clearPenalty = async (req, res) => {
+const clearPenalty = async (req, res) => {
     try {
         const penalty = await Penalty.findById(req.params.id);
 
@@ -75,7 +75,7 @@ exports.clearPenalty = async (req, res) => {
  * @route   POST /api/admin/users/:id/unblock
  * @access  Private (Admin)
  */
-exports.unblockUser = async (req, res) => {
+const unblockUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
 
@@ -120,7 +120,7 @@ exports.unblockUser = async (req, res) => {
  * @route   GET /api/admin/analytics
  * @access  Private (Admin)
  */
-exports.getAnalytics = async (req, res) => {
+const getAnalytics = async (req, res) => {
     try {
         const Order = require('../models/Order');
         const Vendor = require('../models/Vendor');
