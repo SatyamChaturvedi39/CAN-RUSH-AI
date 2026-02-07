@@ -60,4 +60,11 @@ vendorSchema.methods.decrementLoad = async function () {
     }
 };
 
+// Method to update load (used by order controller)
+vendorSchema.methods.updateLoad = async function (change) {
+    this.currentLoad += change;
+    if (this.currentLoad < 0) this.currentLoad = 0;
+    await this.save();
+};
+
 module.exports = mongoose.model('Vendor', vendorSchema);

@@ -95,7 +95,10 @@ orderSchema.methods.calculateLateness = function () {
             this.isLate = true;
             this.lateByMinutes = lateMinutes;
         }
+
+        return lateMinutes; // Return for use in controller
     }
+    return 0;
 };
 
 // Indexes for performance

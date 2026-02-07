@@ -1,9 +1,12 @@
 require('dotenv').config();
 const express = require('express');
+const http = require('http');
 const cors = require('cors');
 const connectDB = require('./config/db');
+const { initializeSocket } = require('./services/socketService');
 
 const app = express();
+const server = http.createServer(app);
 
 // Connect to MongoDB
 connectDB();
@@ -30,9 +33,9 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/vendors', require('./routes/vendors'));
 app.use('/api/foods', require('./routes/foods'));
-// app.use('/api/orders', require('./routes/orders'));
+app.use('/api/orders', require('./routes/orders'));
 // app.use('/api/students', require('./routes/students'));
-// app.use('/api/admin', require('./routes/admin'));
+app.use('/api/admin', require('./routes/admin'));
 
 // 404 handler
 app.use((req, res) => {
@@ -55,9 +58,13 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`\n🚀 Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-    console.log(`📍 Health check: http://localhost:${PORT}/api/health\n`);
+    console.log(`📍 Health check: http://localhost:${PORT}/api/health`);
+
+    // Initialize Socket.io after server starts
+    initializeSocket(server);
+    console.log(`⚡ Socket.io initialized for real-time updates\n`);
 });
 
 module.exports = app;
