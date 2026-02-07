@@ -183,7 +183,7 @@ const VendorDashboard = () => {
                         Kitchen <span className="text-primary">Live</span>
                     </h1>
                     <p className="text-white/40 text-sm font-bold tracking-widest uppercase mt-2">
-                        Vendor Dashboard • {vendor?.name || 'Loading...'}
+                        Vendor Dashboard • {vendor?.name || 'Welcome'}
                     </p>
                 </div>
                 <DashboardNavbar />
