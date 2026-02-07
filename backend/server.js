@@ -28,8 +28,8 @@ app.get('/api/health', (req, res) => {
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
-// app.use('/api/vendors', require('./routes/vendors'));
-// app.use('/api/foods', require('./routes/foods'));
+app.use('/api/vendors', require('./routes/vendors'));
+app.use('/api/foods', require('./routes/foods'));
 // app.use('/api/orders', require('./routes/orders'));
 // app.use('/api/students', require('./routes/students'));
 // app.use('/api/admin', require('./routes/admin'));
