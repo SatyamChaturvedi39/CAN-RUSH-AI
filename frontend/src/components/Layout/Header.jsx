@@ -37,11 +37,6 @@ const Header = () => {
                             Register
                         </Link>
 
-                        <button className="hidden md:flex items-center gap-2 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors">
-                            <ShoppingBag size={18} />
-                            <span>Cart (0)</span>
-                        </button>
-
                         <button
                             onClick={() => setIsMenuOpen(true)}
                             className="group flex items-center gap-3 text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors"
@@ -75,17 +70,21 @@ const Header = () => {
                         </div>
 
                         <nav className="flex-1 flex flex-col justify-center items-center gap-8">
-                            {['Locations', 'How it Works', 'About', 'Contact'].map((item, i) => (
+                            {[
+                                { name: 'Locations', href: '#locations' },
+                                { name: 'How it Works', href: '#how-it-works' },
+                                { name: 'Contact', href: '#contact' }
+                            ].map((item, i) => (
                                 <motion.a
-                                    key={item}
-                                    href="#"
+                                    key={item.name}
+                                    href={item.href}
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: i * 0.1 }}
                                     className="text-5xl md:text-8xl font-heading font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50 hover:to-primary transition-all uppercase tracking-tight"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
-                                    {item}
+                                    {item.name}
                                 </motion.a>
                             ))}
                         </nav>

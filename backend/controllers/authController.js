@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Vendor = require('../models/Vendor');
 const { sendTokenResponse } = require('../utils/tokenUtils');
 
 /**
@@ -52,8 +53,38 @@ exports.register = async (req, res) => {
             vendorId: role === 'vendor' ? vendorId : undefined
         });
 
-        // Send token response
-        sendTokenResponse(user, 201, res);
+        // If vendor, create Vendor document
+        let vendor = null;
+        if (role === 'vendor') {
+            vendor = await Vendor.create({
+                vendorId,
+                name,
+                userId: user._id,
+                isOpen: true,
+                capacity: 20,
+                currentLoad: 0
+            });
+        }
+
+        // Send token response with vendor data if applicable
+        const response = {
+            success: true,
+            token: user.getSignedJwtToken(),
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                studentId: user.studentId,
+                vendorId: user.vendorId
+            }
+        };
+
+        if (vendor) {
+            response.vendor = vendor;
+        }
+
+        res.status(201).json(response);
 
     } catch (error) {
         console.error('Register error:', error);
@@ -102,8 +133,35 @@ exports.login = async (req, res) => {
             });
         }
 
-        // Send token response
-        sendTokenResponse(user, 200, res);
+        // Fetch vendor data if user is vendor (optional - may not exist for old users)
+        let vendor = null;
+        if (user.role === 'vendor') {
+            try {
+                vendor = await Vendor.findOne({ userId: user._id });
+            } catch (err) {
+                console.log('Vendor data not found for user:', user._id);
+            }
+        }
+
+        // Send token response with vendor data
+        const response = {
+            success: true,
+            token: user.getSignedJwtToken(),
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                studentId: user.studentId,
+                vendorId: user.vendorId
+            }
+        };
+
+        if (vendor) {
+            response.vendor = vendor;
+        }
+
+        res.status(200).json(response);
 
     } catch (error) {
         console.error('Login error:', error);

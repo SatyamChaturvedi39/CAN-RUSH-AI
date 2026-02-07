@@ -38,7 +38,7 @@ const Login = () => {
                 if (response.data.user.role === 'vendor') {
                     navigate('/vendor-dashboard');
                 } else {
-                    navigate('/');
+                    navigate('/student-dashboard');
                 }
             }
         } catch (err) {

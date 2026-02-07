@@ -54,11 +54,16 @@ const Register = () => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
 
+                // Store vendor data if vendor
+                if (response.data.vendor) {
+                    localStorage.setItem('vendor', JSON.stringify(response.data.vendor));
+                }
+
                 // Redirect based on role
                 if (response.data.user.role === 'vendor') {
                     navigate('/vendor-dashboard');
                 } else {
-                    navigate('/');
+                    navigate('/student-dashboard');
                 }
             }
         } catch (err) {

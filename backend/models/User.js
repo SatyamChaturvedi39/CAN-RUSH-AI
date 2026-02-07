@@ -71,6 +71,16 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
+// Method to generate JWT token
+userSchema.methods.getSignedJwtToken = function () {
+    const jwt = require('jsonwebtoken');
+    return jwt.sign(
+        { id: this._id },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRE || '7d' }
+    );
+};
+
 // Method to check if user can place orders
 userSchema.methods.canPlaceOrder = function () {
     return !this.isBlocked;

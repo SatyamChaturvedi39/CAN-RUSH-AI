@@ -9,6 +9,7 @@ const vendors = [
         id: 1,
         name: "CHRIST BAKERY",
         tagline: "Artisan Pastries & Coffee",
+        location: "Central Block Gourmet",
         image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop",
         wait: "12 MIN",
         accent: "#ff3300"
@@ -17,6 +18,7 @@ const vendors = [
         id: 2,
         name: "FRESHATARIA",
         tagline: "Clean Eating Reimagined",
+        location: "Side to Basketball, Behind the Fountain",
         image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2080&auto=format&fit=crop",
         wait: "8 MIN",
         accent: "#00cc66"
@@ -25,6 +27,7 @@ const vendors = [
         id: 3,
         name: "MINGOS",
         tagline: "The Taste of Asia",
+        location: "Next to Christ Bakery",
         image: "https://images.unsplash.com/photo-1552611052-33e04de081de?q=80&w=1964&auto=format&fit=crop",
         wait: "20 MIN",
         accent: "#ff9900"
@@ -135,6 +138,116 @@ const Home = () => {
                     <VendorSection key={vendor.id} vendor={vendor} index={index} />
                 ))}
             </main>
+
+            {/* Locations Section */}
+            <section id="locations" className="min-h-screen bg-black py-24 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        className="text-6xl md:text-8xl font-heading font-bold uppercase tracking-tighter mb-16 text-center"
+                    >
+                        Locations
+                    </motion.h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {vendors.map((vendor, i) => (
+                            <motion.div
+                                key={vendor.id}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: i * 0.2 }}
+                                className="bg-white/5 border border-white/10 p-8 rounded-sm"
+                            >
+                                <h3 className="text-2xl font-heading font-bold mb-2" style={{ color: vendor.accent }}>
+                                    {vendor.name}
+                                </h3>
+                                <p className="text-white/60 text-sm mb-4">{vendor.tagline}</p>
+                                <p className="text-white/80">{vendor.location}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* How it Works Section */}
+            <section id="how-it-works" className="min-h-screen bg-black py-24 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        className="text-6xl md:text-8xl font-heading font-bold uppercase tracking-tighter mb-16 text-center"
+                    >
+                        How it Works
+                    </motion.h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        <motion.div
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0 }}
+                            className="text-center"
+                        >
+                            <div className="text-8xl font-heading font-bold text-primary mb-6">01</div>
+                            <h3 className="text-2xl font-heading font-bold mb-4">Order Fresh</h3>
+                            <p className="text-white/60 leading-relaxed">
+                                Choose your favorite meal from any of our campus canteens via the app.
+                            </p>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="text-center"
+                        >
+                            <div className="text-8xl font-heading font-bold text-primary mb-6">02</div>
+                            <h3 className="text-2xl font-heading font-bold mb-4">Track Real-time</h3>
+                            <p className="text-white/60 leading-relaxed">
+                                AI-powered tracking gives you the exact time your food will be ready.
+                            </p>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="text-center"
+                        >
+                            <div className="text-8xl font-heading font-bold text-primary mb-6">03</div>
+                            <h3 className="text-2xl font-heading font-bold mb-4">Grab & Go</h3>
+                            <p className="text-white/60 leading-relaxed">
+                                Receive a notification, walk to the counter, and enjoy your meal without the queue.
+                            </p>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Contact Section */}
+            <section id="contact" className="min-h-screen bg-black py-24 px-6 flex items-center justify-center">
+                <div className="max-w-4xl mx-auto text-center">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        className="text-6xl md:text-8xl font-heading font-bold uppercase tracking-tighter mb-16"
+                    >
+                        Contact
+                    </motion.h2>
+                    <div className="mb-12">
+                        <h3 className="text-2xl font-heading font-bold mb-8 text-primary">Developers</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {['Jiya Elza Jabi', 'Satyam Chaturvedi', 'Aftab Chikkodi'].map((name, i) => (
+                                <motion.div
+                                    key={name}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: i * 0.1 }}
+                                    className="bg-white/5 border border-white/10 p-6 rounded-sm"
+                                >
+                                    <p className="text-xl font-bold">{name}</p>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <footer className="h-screen flex items-center justify-center bg-black relative z-10 border-t border-white/10">
                 <div className="text-center">
